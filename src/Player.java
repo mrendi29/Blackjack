@@ -26,8 +26,6 @@ public class Player  extends GenericPlayer {
             else {
                 System.out.println("Please type y or n.");
             }
-
-
-            }while(true);
+        } while (true);
     }
 }
