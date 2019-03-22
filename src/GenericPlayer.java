@@ -16,7 +16,20 @@ public abstract class GenericPlayer extends  Hand{
 
     //Since this method will be repeated many times we dcan just put that here.
     public void busted(){
+        isBusted = true;
         System.out.printf("%s: Busted!%n", name);
+    }
+
+    public void wins() {
+        System.out.printf("%s: WINS!", name);
+    }
+
+    public void pushed() {
+        System.out.printf("%s: Pushed!", name);
+    }
+
+    public void lose() {
+        System.out.printf("%s: LOST!", name);
     }
 
     abstract public boolean isHitting(Scanner input);

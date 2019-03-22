@@ -59,14 +59,49 @@ public class Game {
 				House house = (House) p;
 				house.flipFirstCard();
 			}
-			if (p.isHitting(input)) {
-				d.deal(p);
-				//if hte player hits we want to know what card did he get
-				System.out.printf("%s", p);
+
+
+			while (!p.isBusted()) {
+
+				if (p.isHitting(input)) {
+					d.deal(p);
+					//if hte player hits we want to know what card did he get
+					System.out.printf("%s", p);
+				} else {
+					break;
+				}
+				//If the player busts.
+				if (p.getValue() > 21) {
+					p.busted();
+				}
+
 			}
 
-		}
+		}//end of previous loop
 
+		//Get house hand value.
+		int houseValue = h.getValue();
+
+		for (int i = 0; i < players.size(); ++i) {
+			GenericPlayer p = players.get(i);
+			if (p instanceof House) {
+				continue;
+			}
+			//Win condition check
+			if (!p.isBusted() && houseValue > 21) {
+				//Player wins
+				p.wins();
+			} else if (p.getValue() == houseValue && !p.isBusted()) {
+				//Player pushed
+				p.pushed();
+			} else if (!p.isBusted() && p.getValue() > houseValue) {
+				//Player wins
+				p.wins();
+			} else {
+				//Player looses
+				p.lose();
+			}
+		}
 
 
 
